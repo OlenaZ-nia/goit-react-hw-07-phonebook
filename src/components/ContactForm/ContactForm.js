@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import actions from '../../redux/contacts-actions';
+import { addContact } from '../../redux/contacts-operations';
+
 import { getContacts } from '../../redux/contacts-selectors';
 
 import s from './ContactForm.module.css';
@@ -17,21 +18,9 @@ export default function ContactForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const includeName = contacts.find(contact => contact.name === name);
-        // (includeName !== undefined) ?
-        // (toast.error(`${name} is already in contacts`)
-        // ) :
-        //     dispatch(actions.addContact(name, number));
+        dispatch(addContact({ name, number }));
+        toast.success(`contact ${name} added`);
         
-        if (includeName !== undefined) {
-            toast.error(`${name} is already in contacts`)
-        } else {
-            dispatch(actions.addContact(name, number));
-            toast.success(`contact ${name} added`);
-        }
-        
-            
-
         setName('');
         setNumber('');
     };
@@ -39,11 +28,17 @@ export default function ContactForm() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        const includeName = contacts.find(contact => contact.name === value);
+        const includeNumber = contacts.find(contact => contact.phone === value);
+
         switch (name) {
             case 'name':
+                (includeName !== undefined)? toast.error(`${value} is already in contacts`):
                 setName(value);
                 break;
             case 'number':
+                (includeNumber !== undefined)? toast.error(`${value} is already in contacts ${includeNumber.name}`):
                 setNumber(value);
                 break;
             default:

@@ -1,3 +1,4 @@
+
 import { ToastContainer } from 'react-toastify';
 import { Container } from './components/Container/Container';
 import  ContactForm  from "./components/ContactForm/ContactForm";
@@ -7,7 +8,6 @@ import SearchFilter from './components/SearchFilter/SearchFilter';
 import 'modern-normalize/modern-normalize.css';
 
 export default function App() {
-
   return (
     <Container>
       <h1>Phone</h1>
@@ -19,3 +19,5 @@ export default function App() {
     </Container>
     );
 }
+
+
