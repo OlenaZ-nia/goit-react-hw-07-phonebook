@@ -71,7 +71,7 @@ export default function ContactForm() {
                        value={number}
                 />
             </label>
-            <button type="submit" className={s.btnAddContact}>
+            <button type="submit" className={s.btnAddContact} >
                 <span className={s.btnText}>Add contact</span>
             </button>
             
